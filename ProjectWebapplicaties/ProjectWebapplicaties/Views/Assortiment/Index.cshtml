@@ -1,0 +1,18 @@
+﻿@model ProjectWebapplicaties.ViewModels.PizzaListViewModel
+
+
+<div class="row" >
+    @foreach (var pizza in Model.Pizzas)
+    {
+        <div class="card col-md-3 mr-2 mb-2" style="width: 18rem;">
+         <img class="card-img-top" src="..." alt="Card image cap">
+         <div class="card-body">
+         <h5 class="card-title">@pizza.Naam</h5>
+         <p class="card-text">Prijs: @pizza.Prijs</p>
+         <p class="card-text">Grootte: @Model.Groottes.Find(x=> x.Id == pizza.GrootteId).Naam </p>
+         <a asp-action="Bestellen" asp-controller="Assortiment" asp-route-id= "@pizza.Id" class="btn btn-primary">Bestellen</a>
+        </div>
+        </div> 
+    }
+
+</div>

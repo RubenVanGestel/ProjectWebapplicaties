@@ -30,6 +30,6 @@ namespace ProjectWebapplicaties.Models
         public string EmailAdres { get; set; }
 
         // navigatieproperties
-        List<Bestelling> Bestellingen { get; set; }
+        public List<Bestelling> Bestellingen { get; set; }
     }
 }

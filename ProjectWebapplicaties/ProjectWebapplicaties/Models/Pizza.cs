@@ -15,7 +15,7 @@ namespace ProjectWebapplicaties.Models
 
         //navigatieproperties
 
-        PizzaGrootte PizzaGrootte { get; set; }
-        BestellingPizza BestellingPizza { get; set; }
+        public PizzaGrootte PizzaGrootte { get; set; }
+        public BestellingPizza BestellingPizza { get; set; }
     }
 }

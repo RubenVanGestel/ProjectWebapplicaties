@@ -1,0 +1,34 @@
+﻿@model ProjectWebapplicaties.ViewModels.PizzaListViewModel
+<table>
+    <thead>
+        <tr>
+            <th>
+                Naam
+            </th>
+            <th>
+                Grootte
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    @foreach (var pizza in Model.Pizzas)
+    {
+        <tbody>
+            <tr>
+                <td>
+                    @pizza.Naam
+                </td> 
+                <td>
+                    @Model.Groottes.Find(x=> x.Id == pizza.GrootteId).Naam
+                </td>
+                <td>
+                    <a asp-controller="Admin" asp-action="PizzaBewerken"  asp-route-id="@pizza.Id" class="btn btn text-light">Aanpassen</a>
+                   <a asp-controller="Admin" asp-action="DeletePizza"  asp-route-id="@pizza.Id" class="btn btn text-light">Verwijderen</a>
+                </td>
+            </tr>
+        </tbody>
+       
+    }
+</table>

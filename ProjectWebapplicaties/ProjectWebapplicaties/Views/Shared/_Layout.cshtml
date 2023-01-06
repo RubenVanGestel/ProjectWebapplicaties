@@ -25,12 +25,28 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (this.User.IsInRole("admin"))
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Assortiment" asp-action="Index">Assortiment</a>
+                        </li>
+
+                        @if (this.User.Identity.IsAuthenticated)
                         {
-                             <li class="nav-item">
-                               <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Gebruikers">Gebruikers</a>
-                            </li>                           
-                        }
+                             <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-dark" id="navbarDropdown" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                                    Admin control<span />
+                                </a>
+                                <ul class="dropdown-menu">
+                                   <li>
+                                        <a class="dropdown-item" asp-controller="Admin" asp-action="Gebruikers">Gebruikers</a>
+                                   </li>
+                                   <li>
+                                        <a class="dropdown-item" asp-controller="Admin" asp-action="PizzaBeheer">Pizza's Bewerken</a>
+                                   </li>
+
+                                </ul>
+                            </li>
+                        }                       
+
                     </ul>
                 </div>
             </div>

@@ -18,8 +18,8 @@ namespace ProjectWebapplicaties.Models
 
         //navigatieproperties
 
-        Bestelling Bestelling { get; set; }
-        List<Pizza> Pizzas { get; set; }
+        public Bestelling Bestelling { get; set; }
+        public List<Pizza> Pizzas { get; set; }
 
 
     }

@@ -32,7 +32,7 @@ namespace ProjectWebapplicaties.Models
 
         //navigatieproperties
 
-        List<Bestelling> Bestellingen { get; set; }
+        public List<Bestelling> Bestellingen { get; set; }
 
     }
 }
