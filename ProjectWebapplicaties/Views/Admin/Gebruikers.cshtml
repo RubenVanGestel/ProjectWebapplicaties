@@ -1,0 +1,29 @@
+﻿@model ProjectWebapplicaties.ViewModels.GebruikerListViewModel
+
+@{
+    ViewData["Title"] = "Gebruikers";
+}
+
+<h2>Gebruikers</h2>
+
+<table>
+    <thead>
+        @foreach (var gebruiker in Model.Gebruikers)
+        {
+            <tr>
+                <td class="col-md-2">
+                    @gebruiker.Naam
+                </td>
+
+                <td class="col-md-2">
+                    @gebruiker.Familienaam
+                </td>
+
+                <td class="col-md-2">
+                    <a asp-action="Details" asp-route-id="@gebruiker.Id">Details</a>
+                    <a asp-action="Delete" asp-route-id="@gebruiker.Id">Verwijderen</a>
+                </td>
+            </tr>
+        }
+    </thead>
+</table>

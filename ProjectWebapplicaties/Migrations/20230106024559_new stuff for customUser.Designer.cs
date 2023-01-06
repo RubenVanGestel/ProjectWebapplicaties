@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectWebapplicaties.Data;
 
 namespace ProjectWebapplicaties.Migrations
 {
     [DbContext(typeof(ProjectWebapplicatiesContext))]
-    partial class ProjectWebapplicatiesContextModelSnapshot : ModelSnapshot
+    [Migration("20230106024559_new stuff for customUser")]
+    partial class newstuffforcustomUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
