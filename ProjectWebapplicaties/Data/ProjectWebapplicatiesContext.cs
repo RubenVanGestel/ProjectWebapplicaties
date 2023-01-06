@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjectWebapplicaties.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using ProjectWebapplicaties.Areas.Identity.Data;
 
 namespace ProjectWebapplicaties.Data
 {
-    public class ProjectWebapplicatiesContext : DbContext
+    public class ProjectWebapplicatiesContext : IdentityDbContext<CustomUser>
     {
         public ProjectWebapplicatiesContext(DbContextOptions<ProjectWebapplicatiesContext> options) : base(options)
         {
@@ -19,6 +22,8 @@ namespace ProjectWebapplicaties.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            
             modelBuilder.Entity<Klant>().ToTable("Klanten");
             modelBuilder.Entity<Medewerker>().ToTable("Medewerkers");
             modelBuilder.Entity<Bestelling>().ToTable("Bestellingen");
@@ -27,7 +32,5 @@ namespace ProjectWebapplicaties.Data
             modelBuilder.Entity<BestellingPizza>().ToTable("BestellingPizzas");
             modelBuilder.Entity<Pizza>().ToTable("Pizzas");
         }
-
-
     }
 }

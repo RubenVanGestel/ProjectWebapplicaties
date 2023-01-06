@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProjectWebapplicaties.Areas.Identity.Data;
 using ProjectWebapplicaties.Data;
 using System;
 using System.Collections.Generic;
@@ -27,11 +30,39 @@ namespace ProjectWebapplicaties
         {
             services.AddControllersWithViews();
             services.AddDbContext<ProjectWebapplicatiesContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LocalDBConnection")));
+            services.AddDefaultIdentity<CustomUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ProjectWebapplicatiesContext>();
+            services.AddRazorPages();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                //Password Settings
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+                
+
+                //Lockout Settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                //User Settings
+                options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = false;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -47,6 +78,7 @@ namespace ProjectWebapplicaties
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -54,6 +86,7 @@ namespace ProjectWebapplicaties
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
                 
             });
         }
