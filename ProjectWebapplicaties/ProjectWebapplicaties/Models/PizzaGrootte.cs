@@ -10,7 +10,5 @@ namespace ProjectWebapplicaties.Models
 
         public string Naam { get; set; }
 
-        //navigatieproperties
-        public List<Pizza> Pizzas { get; set; }
     }
 }

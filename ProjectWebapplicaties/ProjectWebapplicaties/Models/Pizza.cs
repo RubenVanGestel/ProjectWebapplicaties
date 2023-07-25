@@ -9,13 +9,10 @@ namespace ProjectWebapplicaties.Models
 
         public string Naam { get; set; }
 
-        public int GrootteId { get; set; }
-
         public decimal Prijs { get; set; }
 
         //navigatieproperties
 
         public PizzaGrootte PizzaGrootte { get; set; }
-        public BestellingPizza BestellingPizza { get; set; }
     }
 }

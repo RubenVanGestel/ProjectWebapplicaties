@@ -11,14 +11,10 @@ namespace ProjectWebapplicaties.Models
         [Required]
         public int BestellingId { get; set; }
 
-        [Required]
-        public int PizzaId { get; set; }
-
         public int Aantal { get; set; }
 
         //navigatieproperties
 
-        public Bestelling Bestelling { get; set; }
         public List<Pizza> Pizzas { get; set; }
 
 

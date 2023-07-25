@@ -9,7 +9,7 @@
          <div class="card-body">
          <h5 class="card-title">@pizza.Naam</h5>
          <p class="card-text">Prijs: @pizza.Prijs</p>
-         <p class="card-text">Grootte: @Model.Groottes.Find(x=> x.Id == pizza.GrootteId).Naam </p>
+@*         <p class="card-text">Grootte: @Model.Groottes.Find(x=> x.Id == pizza.GrootteId).Naam </p>*@
          <a asp-action="Bestellen" asp-controller="Assortiment" asp-route-id= "@pizza.Id" class="btn btn-primary">Bestellen</a>
         </div>
         </div> 

@@ -21,7 +21,7 @@
                     @pizza.Naam
                 </td> 
                 <td>
-                    @Model.Groottes.Find(x=> x.Id == pizza.GrootteId).Naam
+                @*    @Model.Groottes.Find(x=> x.Id == pizza.PizzaGrootte).Naam*@
                 </td>
                 <td>
                     <a asp-controller="Admin" asp-action="PizzaBewerken"  asp-route-id="@pizza.Id" class="btn btn text-light">Aanpassen</a>

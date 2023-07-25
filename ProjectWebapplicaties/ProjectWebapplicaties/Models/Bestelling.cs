@@ -7,15 +7,7 @@ namespace ProjectWebapplicaties.Models
     {
         [Key]
         public int Id { get; set; }
-
-        public int KlantId { get; set; }
-
-        public int MedewerkerId { get; set; }
-
-        public int StatusId { get; set; }
-
         public DateTime Datum { get; set; }
-
         public bool IsBezorging { get; set; }
 
         //navigatieproperties
