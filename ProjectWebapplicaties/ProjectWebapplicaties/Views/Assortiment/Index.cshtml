@@ -4,12 +4,36 @@
 <div class="row" >
     @foreach (var pizza in Model.Pizzas)
     {
+        var img = "";
+        switch (pizza.Naam.ToLower())
+        {
+            case "margherita":
+                img = "PizzaMargherita.jpg";
+                break;
+
+            case "bolognese":
+                img = "pizzaBolognese.jpg";
+                break;
+
+            case "peperoni":
+                img = "PizzaSalami.jpg";
+                break;
+
+            case "kebap":
+                img = "pizzaKebap.jpg";
+                break;
+
+            default:
+                img = "";
+                break;
+
+        }
         <div class="card col-md-3 mr-2 mb-2" style="width: 18rem;">
-         <img class="card-img-top" src="..." alt="Card image cap">
+         <img class="card-img-top" src="~/images/@img" alt="Card image cap">
          <div class="card-body">
          <h5 class="card-title">@pizza.Naam</h5>
          <p class="card-text">Prijs: @pizza.Prijs</p>
-@*         <p class="card-text">Grootte: @Model.Groottes.Find(x=> x.Id == pizza.GrootteId).Naam </p>*@
+        <p class="card-text">Grootte: @Model.PizzaGroottes.Find(x=> x.Id == pizza.PizzaGrootteId).Naam </p>
          <a asp-action="Bestellen" asp-controller="Assortiment" asp-route-id= "@pizza.Id" class="btn btn-primary">Bestellen</a>
         </div>
         </div> 

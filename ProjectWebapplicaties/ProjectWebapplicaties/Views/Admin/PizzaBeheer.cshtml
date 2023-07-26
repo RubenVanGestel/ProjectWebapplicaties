@@ -1,34 +1,37 @@
 ﻿@model ProjectWebapplicaties.ViewModels.PizzaListViewModel
-<table>
+
+<h1>Pizza Beheer</h1>
+
+
+  
+<table class="table">
     <thead>
         <tr>
-            <th>
-                Naam
-            </th>
-            <th>
-                Grootte
-            </th>
-            <th>
+            <th scope="col">Naam</th>
+            <th scope="col">Grootte</th>
+            <th scope="col">Prijs</th>
 
-            </th>
+            <th scope="col"></th>
         </tr>
     </thead>
     @foreach (var pizza in Model.Pizzas)
     {
         <tbody>
             <tr>
-                <td>
-                    @pizza.Naam
-                </td> 
-                <td>
-                @*    @Model.Groottes.Find(x=> x.Id == pizza.PizzaGrootte).Naam*@
-                </td>
-                <td>
-                    <a asp-controller="Admin" asp-action="PizzaBewerken"  asp-route-id="@pizza.Id" class="btn btn text-light">Aanpassen</a>
-                   <a asp-controller="Admin" asp-action="DeletePizza"  asp-route-id="@pizza.Id" class="btn btn text-light">Verwijderen</a>
+                <td>@pizza.Naam</td>
+                <td>@Model.PizzaGroottes.Find(x=> x.Id == pizza.PizzaGrootteId).Naam</td>
+                <td>@pizza.Prijs€</td>
+
+                <td class="d-flex justify-content-end">
+                   <a asp-controller="Admin" asp-action="PizzaBewerken"  asp-route-id="@pizza.Id" class="btn btn-outline-primary text-primary mr-2">Aanpassen</a>
+                   <a asp-controller="Admin" asp-action="DeletePizza"  asp-route-id="@pizza.Id" class="btn btn-outline-danger text-danger">Verwijderen</a>
                 </td>
             </tr>
         </tbody>
        
     }
 </table>
+
+<div>
+    <a asp-controller="Admin" asp-action="PizzaToevoegen" class="btn btn-primary">Pizza Toevoegen</a>
+</div>

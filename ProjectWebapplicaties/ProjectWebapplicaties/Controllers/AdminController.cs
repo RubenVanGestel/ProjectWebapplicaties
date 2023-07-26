@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using ProjectWebapplicaties.Areas.Identity.Data;
+using ProjectWebapplicaties.Data;
 using ProjectWebapplicaties.Data.UnitOfWork;
 using ProjectWebapplicaties.Models;
 using ProjectWebapplicaties.ViewModels;
+
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,12 +19,14 @@ namespace ProjectWebapplicaties.Controllers
         private readonly UserManager<CustomUser> _userManager;
         private readonly IUnitOfWork _uow;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ProjectWebapplicatiesContext _context;
 
-        public AdminController(UserManager<CustomUser> userManager, RoleManager<IdentityRole> roleManager, IUnitOfWork uow) 
+        public AdminController(UserManager<CustomUser> userManager, RoleManager<IdentityRole> roleManager, IUnitOfWork uow,ProjectWebapplicatiesContext context) 
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _uow = uow;
+            _context = context;
         }
         [HttpGet]
         public IActionResult GrantPermissions()
@@ -70,17 +75,19 @@ namespace ProjectWebapplicaties.Controllers
         public async Task<IActionResult> PizzaBeheer()
         {
             PizzaListViewModel vm = new PizzaListViewModel();
+            
             vm.Pizzas = _uow.PizzaRepository.GetAll().ToList();
-            vm.Groottes = _uow.PizzaGrootteRepository.GetAll().ToList();
+            vm.PizzaGroottes = _uow.PizzaGrootteRepository.GetAll().ToList();
+            await _uow.Save();
             return View(vm);
         }
 
         [HttpGet]
         public async Task<ActionResult<Pizza>> DeletePizza(int id)
         {
-            Pizza merk = await _uow.PizzaRepository.GetById(id);
-            if (merk == null) return NotFound();
-            _uow.PizzaRepository.Delete(merk);
+            Pizza grootte = await _uow.PizzaRepository.GetById(id);
+            if (grootte == null) return NotFound();
+            _uow.PizzaRepository.Delete(grootte);
             await _uow.Save();
 
             return RedirectToAction(nameof(PizzaBeheer));
@@ -145,6 +152,7 @@ namespace ProjectWebapplicaties.Controllers
             GebruikerListViewModel viewModel = new GebruikerListViewModel()
             {
                 Gebruikers = _userManager.Users.ToList()
+               
             };
 
             return View(viewModel);
@@ -161,11 +169,37 @@ namespace ProjectWebapplicaties.Controllers
 
         private SelectList getPizzaGroottes()
         {
-            var pizzaGrootte = _uow.PizzaGrootteRepository.GetAll().ToDictionary(p => p.Id,p=>p.Naam);
-            pizzaGrootte.Add(-1, "Gelieve een Grootte te selecteren");
+            var pizzaGrootte = _uow.PizzaGrootteRepository.GetAll().ToDictionary(p => p.Id, p=>p.Naam);
+            pizzaGrootte.Add(-1, "Grootte Selecteren");
             var list = new SelectList(pizzaGrootte.OrderBy(x => x.Key), "Key", "Value");
             return list;
         }
+
+        public IActionResult PizzaToevoegen()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PizzaToevoegen(PizzaAanmakenViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(new Pizza()
+                {
+                    Naam = viewModel.Naam,
+                    PizzaGrootteId = viewModel.PizzaGrootteId,
+                    Prijs = viewModel.Prijs,
+
+                });
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(PizzaBeheer));
+            }
+            return View(viewModel);
+        }
+
+
 
     }
 }

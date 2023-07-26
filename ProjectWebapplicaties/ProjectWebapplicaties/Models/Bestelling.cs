@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProjectWebapplicaties.Models
@@ -14,7 +15,8 @@ namespace ProjectWebapplicaties.Models
 
         public Klant Klant { get; set; }
         public Medewerker Medewerker { get; set; }
-        public Status Status { get; set; }  
+        public Status Status { get; set; }
 
+        public List<BestellingPizza> BestellingPizzas { get; set; }
     }
 }

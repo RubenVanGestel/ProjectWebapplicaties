@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectWebapplicaties.Models
 {
@@ -11,8 +12,10 @@ namespace ProjectWebapplicaties.Models
 
         public decimal Prijs { get; set; }
 
-        //navigatieproperties
+        public int PizzaGrootteId { get; set; }
 
-        public PizzaGrootte PizzaGrootte { get; set; }
+        //navigatieproperties
+        public List<BestellingPizza> BestellingPizzas { get; set; }
+
     }
 }
