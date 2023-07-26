@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectWebapplicaties.Models
 {
@@ -9,13 +10,12 @@ namespace ProjectWebapplicaties.Models
 
         public string Naam { get; set; }
 
-        public int GrootteId { get; set; }
-
         public decimal Prijs { get; set; }
 
-        //navigatieproperties
+        public int PizzaGrootteId { get; set; }
 
-        PizzaGrootte PizzaGrootte { get; set; }
-        BestellingPizza BestellingPizza { get; set; }
+        //navigatieproperties
+        public List<BestellingPizza> BestellingPizzas { get; set; }
+
     }
 }

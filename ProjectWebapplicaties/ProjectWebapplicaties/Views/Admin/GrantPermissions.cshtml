@@ -8,9 +8,11 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <select asp-for="GebruikerId" asp-items="Model.Gebruikers"></select>
+        <span asp-validation-for="GebruikerId" class=" text-danger"></span>
     </div>
     <div class="form-group">
         <select asp-for="RolId" asp-items="Model.Rollen"></select>
+        <span asp-validation-for="RolId" class=" text-danger"></span>
     </div>
     <div class="form-group">
        <input type="submit" value="Opslaan" class="btn btn-primary"/>

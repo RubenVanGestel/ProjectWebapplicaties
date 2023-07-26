@@ -250,13 +250,13 @@ namespace ProjectWebapplicaties.Migrations
                     b.Property<bool>("IsBezorging")
                         .HasColumnType("bit");
 
-                    b.Property<int>("KlantId")
+                    b.Property<int?>("KlantId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MedewerkerId")
+                    b.Property<int?>("MedewerkerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int?>("StatusId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -277,9 +277,6 @@ namespace ProjectWebapplicaties.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Aantal")
-                        .HasColumnType("int");
-
                     b.Property<int>("BestellingId")
                         .HasColumnType("int");
 
@@ -287,6 +284,10 @@ namespace ProjectWebapplicaties.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BestellingId");
+
+                    b.HasIndex("PizzaId");
 
                     b.ToTable("BestellingPizzas");
                 });
@@ -378,11 +379,11 @@ namespace ProjectWebapplicaties.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("GrootteId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Naam")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PizzaGrootteId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Prijs")
                         .HasColumnType("decimal(18,2)");
@@ -478,19 +479,28 @@ namespace ProjectWebapplicaties.Migrations
                 {
                     b.HasOne("ProjectWebapplicaties.Models.Klant", "Klant")
                         .WithMany()
-                        .HasForeignKey("KlantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("KlantId");
 
                     b.HasOne("ProjectWebapplicaties.Models.Medewerker", "Medewerker")
                         .WithMany()
-                        .HasForeignKey("MedewerkerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MedewerkerId");
 
                     b.HasOne("ProjectWebapplicaties.Models.Status", "Status")
                         .WithMany()
-                        .HasForeignKey("StatusId")
+                        .HasForeignKey("StatusId");
+                });
+
+            modelBuilder.Entity("ProjectWebapplicaties.Models.BestellingPizza", b =>
+                {
+                    b.HasOne("ProjectWebapplicaties.Models.Bestelling", "Bestelling")
+                        .WithMany("BestellingPizzas")
+                        .HasForeignKey("BestellingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectWebapplicaties.Models.Pizza", "Pizzas")
+                        .WithMany("BestellingPizzas")
+                        .HasForeignKey("PizzaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

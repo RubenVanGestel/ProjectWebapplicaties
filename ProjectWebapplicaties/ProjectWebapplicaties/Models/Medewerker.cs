@@ -28,8 +28,5 @@ namespace ProjectWebapplicaties.Models
 
         [MaxLength(50)]
         public string EmailAdres { get; set; }
-
-        // navigatieproperties
-        List<Bestelling> Bestellingen { get; set; }
     }
 }

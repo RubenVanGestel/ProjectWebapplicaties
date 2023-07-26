@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ProjectWebapplicaties.Models
 {
@@ -29,10 +28,6 @@ namespace ProjectWebapplicaties.Models
 
         [MaxLength(50)]
         public string EmailAdres { get; set; }
-
-        //navigatieproperties
-
-        List<Bestelling> Bestellingen { get; set; }
 
     }
 }

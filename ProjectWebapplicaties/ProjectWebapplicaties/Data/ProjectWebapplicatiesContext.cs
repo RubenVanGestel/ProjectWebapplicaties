@@ -23,7 +23,7 @@ namespace ProjectWebapplicaties.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            
+
             modelBuilder.Entity<Klant>().ToTable("Klanten");
             modelBuilder.Entity<Medewerker>().ToTable("Medewerkers");
             modelBuilder.Entity<Bestelling>().ToTable("Bestellingen");

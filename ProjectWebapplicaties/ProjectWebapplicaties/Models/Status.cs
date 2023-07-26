@@ -10,8 +10,5 @@ namespace ProjectWebapplicaties.Models
 
         [Required]
         public string Naam { get; set; }
-
-        //navigatieproperties
-        List<Bestelling> Bestellingen { get; set; }
     }
 }
