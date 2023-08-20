@@ -1,0 +1,38 @@
+﻿@model ProjectWebapplicaties.ViewModels.GebruikerListViewModel
+
+@{
+    ViewData["Title"] = "Gebruikers";
+}
+
+<h2>Gebruikers</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Naam</th>
+            <th scope="col">Familie Naam</th>
+            <th></th>
+        </tr>
+    </thead>
+ 
+        @foreach (var gebruiker in Model.Gebruikers)
+        {
+           <tbody>
+            <tr>
+                <td class="col-md-2">
+                    @gebruiker.Naam
+                </td>
+
+                <td class="col-md-2">
+                    @gebruiker.Familienaam
+                </td>
+
+                <td class="d-flex justify-content-end" >
+                    <a asp-action="GrantPermissions" asp-route-id="@gebruiker.Id" class="btn btn-outline-primary mr-2">Rollen Aanpassen</a>
+                    <a asp-action="Delete" asp-route-id="@gebruiker.Id" class="btn btn-outline-danger">Verwijderen</a>
+                </td>
+            </tr>
+        </tbody>
+        }
+   
+</table>

@@ -1,0 +1,29 @@
+﻿@model Pizza
+@using ProjectWebapplicaties.Controllers
+
+@using(Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(pizza => pizza.Id)
+    <div class="form-row">
+        <div class="form-group">
+            <label asp-for="Prijs" class="control-label">@Html.DisplayNameFor(prijs => this.Model.Prijs)</label>
+            <input asp-for="Prijs" class="form-control" />
+
+        </div>
+
+
+        <div class="form-group">
+            <label asp-for="Naam" class="control-label">@Html.DisplayNameFor(model => this.Model.Naam)</label>
+            <input asp-for="Naam" class="form-control" />
+
+        </div>
+        <div class="form-group">
+            <label asp-for="PizzaGrootteId">Grootte</label>
+            <select asp-for="PizzaGrootteId" class="form-control" asp-items="ViewBag.Groottes"></select>
+            <span asp-validation-for="PizzaGrootteId" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Aanpassen" title="Aanpassen" name="Aanpassen" class="btn btn-danger" />
+    </div>
+}
